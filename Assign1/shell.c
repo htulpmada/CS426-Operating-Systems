@@ -6,6 +6,19 @@
 #define MAX_LINE 80
 #define HISTORY_LENGTH 10
 
+
+
+
+
+
+
+int parse(char* line, char args, char** linePointer) {
+
+}
+
+
+
+
 int main(void) {
 
 	// command line args
@@ -52,7 +65,7 @@ int main(void) {
 				continue;
 			}
 			else{
-			//	background = parse(line, args, linePointer);
+				background = parse(line, args, linePointer);
 			}
 
 			// check requested command(s)
