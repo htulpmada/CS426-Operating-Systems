@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
 	}
 	else{
 		// Invalid input
-		printf("Please enter a single posotive integer\n");
+		printf("Please enter a single positive integer\n");
 		return 0;
 	}
 
