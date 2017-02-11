@@ -11,9 +11,29 @@
 
 
 
-
-int parse(char* line, char args, char** linePointer) {
-
+int parse(char* line, char** args, char** linePointer) {
+	// new pointers for parsing
+	char* copy = malloc(MAX_LINE);
+	linePointer = copy;
+	
+	strcpy(copy,line);
+	char* temp = strtok(copy, " ");
+	
+	// tokenize line
+	int i = 0;
+	while(i != MAX_LINE / 2){
+		if (temp == NULL){
+			args[i-1][strlen(args[i-1])-1] = '\0';
+			break;
+		}
+		args[i] = temp;
+		temp = strtok(NULL, " ");
+	}
+	if ( strcmp(args[i-1], "&") == 0) {
+		args[i-1] = NULL;
+		return 1;
+	}
+	return 0;
 }
 
 
@@ -53,7 +73,7 @@ int main(void) {
 		char* args[MAX_LINE/2 + 1] = {(char *) NULL};
 
 		// run concurrent?
-		int background = 0;
+		int ConCurr = 0;
 		
 		if(fgets(line, MAX_LINE, stdin)){
 			if(strchr(line, '\n') == NULL){
@@ -65,7 +85,7 @@ int main(void) {
 				continue;
 			}
 			else{
-				background = parse(line, args, linePointer);
+				ConCurr = parse(line, args, linePointer);
 			}
 
 			// check requested command(s)
