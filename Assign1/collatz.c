@@ -1,3 +1,11 @@
+////////////////
+// Adam Pluth //
+// CS 426 OS  //
+//  2/14/17   //
+//  collatz   //
+////////////////
+
+
 #include <stdio.h> // fprintf, printf
 #include <unistd.h> // fork()
 #include <sys/types.h> // pid_t
@@ -9,11 +17,6 @@ pid_t id;
 void collatz(int i);
 
 int main(int argc, char** argv) {
-	// print when start 
-	// for debug purposes
-	if(id == 0){
-		printf("child process starting\n");
-	}	
 
 	// program start //
 
@@ -42,12 +45,6 @@ int main(int argc, char** argv) {
 	}
 
 
-	if(id == 0){
-		printf("child done \n");
-	}	
-	else{
-		printf("parent done\n\n");
-	}
 	return 0;
 }
 

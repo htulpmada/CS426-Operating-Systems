@@ -1,3 +1,11 @@
+////////////////
+// Adam Pluth //
+// CS 426 OS  //
+//  2/14/17   //
+//  shell.c   //
+////////////////
+
+
 #include <stdio.h> 
 #include <stdlib.h>
 #include <unistd.h> 
