@@ -1,0 +1,17 @@
+
+
+Threads, using Pthreads API.  Due Feb 22 (Wed), 11:59pm.  In C language,  only the  source code to be submitted via BBL. Grading will use Ubuntu (Linux) environment.
+
+Chapter (3 and) 4 Programming Problems:3.20, 4.20, 4.21. 
+
+Requirements:
+(1)  Requirements for 3.20/4.20:
+
+	a. The number of processes/threads  should be a command line input.
+	
+	b. Print at each action. The outputs should be clear enough to identify the action with a process id or a thread id. 
+
+(2)  Requirements for 4.21:
+
+	a. Print at the beginning and the end of a thread. The outputs should be clear enough to identify the action.
+	b. Parent (main) thread prints  out the values.   
