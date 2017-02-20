@@ -2,7 +2,7 @@
 all: pid stats 
 	
 pid:
-	gcc -Wall -g -std=c99 -o pid_manager pid_manager.c
+	gcc -Wall -g -std=c99 -o pid_manager pid_managerMain.c
 	
 
 stats:
