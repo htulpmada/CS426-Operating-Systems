@@ -8,33 +8,52 @@
 
 
 #include <stdio.h> // fprintf, printf
-#include <unistd.h> // fork()
-//#include <sys/types.h> // pid_t
-#include <sys/wait.h> // wait();
-#include <stdlib.h> // wait();
 #include <string.h>
 
 #include "pid_manager.h"
 
-int allocate_pid(){
-	for(int i = 0; i < MAX_PID; i++){
-		if(pid_map[i] == 0){
-			pid_map[i] = 1;
-			return i + MIN_PID;
-		}
-	}
-	return 1;
-}
+int go;
 
 int allocate_map(){
-	for(int i = 0; i < MAX_PID; i++){
-		pid_map[i] = 0;
-	}
-	return 1;
+    for(int i = 0; i < MAX_PID; i++){
+            pid_map[i] = 0;
+    }
+
+    go = pthread_mutex_init(&lock, NULL); 
+
+    if(go!=0){go = -1;}
+    return go;
+}
+
+int allocate_pid(){
+    int go;
+    go = pthread_mutex_trylock(&lock);
+
+    if(go!=0){return go;}
+    else if(availible < 1){return -1;}
+    int i;
+    for(i = 0; i < MAX_PID; i++){
+            if(pid_map[i] == 0){
+                availible--;
+                pid_map[i] = 1;
+                return i + MIN_PID;
+            }
+    }
+    return go;
 }
 
 void release_pid(int pid){
-	pid_map[MIN_PID + pid] = 0;
+    int go;
+    
+    if(pid < MIN_PID || pid > MAX_PID){return;}
+
+    go = pthread_mutex_lock(&lock);
+    if(go!=0){return;}
+    pid_map[MIN_PID + pid] = 0;
+    availible++;
+    go = pthread_mutex_unlock(&lock);
+
+    return;
 }
 
 

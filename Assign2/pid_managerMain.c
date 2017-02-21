@@ -1,18 +1,52 @@
 #include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <unistd.h>
+#include <pthread.h>
 
+#include "pid_manager.h"
 #include "pid_manager.c"
 
-int numThread = 100;
+int MAXTIME = 5;
+int numThread = 3;
+void *testPid(void *args);
 
-int main()
-{
-    int time[RANGE];
-    allocate_map();
+
+int main(){
+    int go;
+    int sTime[numThread];
+    pthread_t t[numThread];
+
+    go = allocate_map();
+    if(go!=0){exit(1);}
+    
     for(int i = 0; i < numThread; i++){
-        int j = allocate_pid();
-        fprintf(stdout, "Allocated PID: %d \n", j);
-        release_pid(j);
+        sTime[i] = (rand() % MAXTIME);
     }
+
+    for(int i = 0; i < numThread; i++){
+        go = pthread_create(&t[i], NULL, testPid,(void *) &sTime[i]);
+        if(go!=0){exit(1);}
+    }
+    
+    for(int i = 0; i < numThread; i++){
+        go = pthread_join(&t[i], NULL);
+        if(go!=0){exit(1);}
+    }
+    //wait(NULL);
+    exit(0);
+
+}
+
+void *testPid(void *args){
+    int sTime;
+    int p;
+    
+    sTime = *((unsigned int *) args);
+//    sleep(sTime);
+    p = allocate_pid();
+    printf("test: %d\n",p);
+    sleep(sTime);
+    release_pid(p);
+    
+    return NULL;
 }

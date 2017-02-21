@@ -7,4 +7,14 @@
         <activeConfTypeElem>0</activeConfTypeElem>
         <activeConfIndexElem>0</activeConfIndexElem>
     </data>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/gomez/cs/Git/CS426-Operating-Systems/Assign2/makefile</file>
+            <file>file:/home/gomez/cs/Git/CS426-Operating-Systems/Assign2/pid_manager.c</file>
+            <file>file:/home/gomez/cs/Git/CS426-Operating-Systems/Assign2/statistics.c</file>
+            <file>file:/home/gomez/cs/Git/CS426-Operating-Systems/Assign2/pid_managerMain.c</file>
+            <file>file:/home/gomez/cs/Git/CS426-Operating-Systems/Assign2/pid_manager.h</file>
+        </group>
+    </open-files>
 </project-private>

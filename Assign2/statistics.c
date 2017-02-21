@@ -6,13 +6,10 @@
 //////////////////
 
 
-#include <stdio.h> // fprintf, printf
-#include <unistd.h> // fork()
-#include <sys/types.h> // pid_t
-#include <sys/wait.h> // wait();
-#include <stdlib.h> // wait();
+#include <stdio.h> 
+#include <unistd.h> 
+#include <stdlib.h> 
 
-pid_t id;
 
 
 int main(int argc, char** argv) {
