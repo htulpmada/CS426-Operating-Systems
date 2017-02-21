@@ -27,7 +27,7 @@ int allocate_map(){
 
 int allocate_pid(){
     int go;
-    go = pthread_mutex_trylock(&lock);
+    go = pthread_mutex_lock(&lock);
 
     if(go!=0){return go;}
     else if(availible < 1){return -1;}

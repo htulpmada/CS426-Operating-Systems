@@ -15,7 +15,7 @@ int main(){
     int go;
     int sTime[numThread];
     pthread_t t[numThread];
-
+    srand(time(NULL));
     go = allocate_map();
     if(go!=0){exit(1);}
     

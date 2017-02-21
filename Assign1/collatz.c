@@ -36,7 +36,7 @@ int main(int argc, char** argv) {
 		// Fork Parent
 		else {
 			wait(NULL);
-		}
+            }
 	}
 	else{
 		// Invalid input
