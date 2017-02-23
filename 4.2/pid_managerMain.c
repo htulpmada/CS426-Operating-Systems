@@ -48,8 +48,6 @@ void *testPid(void *args){
     sleep(sTime);
     printf("slept for %d seconds\n",sTime);
     release_pid(p);
-    pthread_exit(0);
-
     
     return NULL;
 }

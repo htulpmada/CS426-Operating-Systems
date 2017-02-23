@@ -7,32 +7,48 @@
 //////////////////
 
 
-#include <stdio.h> // fprintf, printf
+#include <stdio.h> 
 #include <string.h>
 
 #include "pid_manager.h"
 
 int go;
 
+int main(){
+    
+    go = allocate_map();
+    
+    if(!go) printf("Success!\n");
+    
+    else printf("didn't work\n");
+    
+    for(int i = 1; i != T; i++){
+        go = allocate_pid();
+        printf("pid: %d allocated\n",go);
+        
+        release_pid(go);
+        printf("pid: %d released\n",go);
+    }
+    printf("pids availible: %d\n",availible);
+    
+    return 0;
+}
+
 int allocate_map(){
+    
     for(int i = 0; i < MAX_PID; i++){
             pid_map[i] = 0;
     }
-
-//    go = pthread_mutex_init(&lock, NULL); 
-
-//    if(go!=0){go = -1;}
     return go;
 }
 
 int allocate_pid(){
-    int go = 0;
-//    go = pthread_mutex_lock(&lock);
+    int go;
 
-    if(go!=0){return go;}
-    else if(availible < 1){return -1;}
+    if(availible < 1){return -1;}
+
     int i;
-    for(i = 0; i < MAX_PID; i++){
+    for(i = 0; i <= MAX_PID; i++){
             if(pid_map[i] == 0){
                 availible--;
                 pid_map[i] = 1;
@@ -43,15 +59,12 @@ int allocate_pid(){
 }
 
 void release_pid(int pid){
-    int go = 0;
+    int go;
     
-    if(pid < MIN_PID || pid > MAX_PID){return;}
+    if(pid < MIN_PID || pid > MAX_PID){printf("Invalid PID\n");return;}
 
- //   go = pthread_mutex_lock(&lock);
-    if(go!=0){return;}
     pid_map[MIN_PID + pid] = 0;
     availible++;
-//    go = pthread_mutex_unlock(&lock);
 
     return;
 }
