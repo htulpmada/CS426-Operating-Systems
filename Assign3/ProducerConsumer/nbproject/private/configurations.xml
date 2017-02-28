@@ -2,13 +2,8 @@
 <configurationDescriptor version="97">
   <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
     <df root="." name="0">
-      <df name="ProducerConsumer">
-        <in>ProCon.c</in>
-        <in>buffer.h</in>
-      </df>
-      <in>pid_manager.c</in>
-      <in>pid_manager.h</in>
-      <in>pid_managerMain.c</in>
+      <in>ProCon.c</in>
+      <in>buffer.h</in>
     </df>
   </logicalFolder>
   <projectmakefile>makefile</projectmakefile>
@@ -51,7 +46,8 @@
         <runcommandpicklist>
           <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
         </runcommandpicklist>
-        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <runcommand>"${OUTPUT_PATH}" 10 3 3</runcommand>
+        <arguments>10 3 3</arguments>
         <rundir>.</rundir>
         <buildfirst>false</buildfirst>
         <terminal-type>0</terminal-type>
