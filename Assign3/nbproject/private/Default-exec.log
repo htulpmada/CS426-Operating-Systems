@@ -1,15 +1,16 @@
 called: gcc
-	/home/gomez/cs/Git/CS426-Operating-Systems/Assign1
+	/home/gomez/cs/Git/CS426-Operating-Systems/Assign3
 	gcc
 	-Wall
 	-g
 	-std=c99
 	-o
-	collatz
-	collatz.c
+	pid_manager
+	pid_managerMain.c
+	-pthread
 
 called: /usr/bin/ld
-	/home/gomez/cs/Git/CS426-Operating-Systems/Assign1
+	/home/gomez/cs/Git/CS426-Operating-Systems/Assign3
 	/usr/bin/ld
 	--sysroot=/
 	--build-id
@@ -23,7 +24,7 @@ called: /usr/bin/ld
 	-z
 	relro
 	-o
-	collatz
+	pid_manager
 	/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crt1.o
 	/usr/lib/gcc/x86_64-linux-gnu/4.8/../../../x86_64-linux-gnu/crti.o
 	/usr/lib/gcc/x86_64-linux-gnu/4.8/crtbegin.o
@@ -35,11 +36,12 @@ called: /usr/bin/ld
 	-L/usr/lib/x86_64-linux-gnu
 	-L/usr/lib/../lib
 	-L/usr/lib/gcc/x86_64-linux-gnu/4.8/../../..
-	/tmp/cceX7BAV.o
+	/tmp/ccLAenkT.o
 	-lgcc
 	--as-needed
 	-lgcc_s
 	--no-as-needed
+	-lpthread
 	-lc
 	-lgcc
 	--as-needed

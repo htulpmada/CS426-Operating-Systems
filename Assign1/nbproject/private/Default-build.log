@@ -1,4 +1,0 @@
-gcc -Wall -g -std=c99 -o collatz collatz.c
-collatz 5
-make: collatz: Command not found
-make: *** [collatz] Error 127
