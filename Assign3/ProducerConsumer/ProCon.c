@@ -11,16 +11,19 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <semaphore.h>
 
 #include "buffer.h"
 
-#define MAXTIME 10
-#define numThread 30
+#define MAXTIME 100
 
 int go;
 int index = 0;
 buffer_item buffer[BUFFER_SIZE];
+
 pthread_mutex_t lock;
+sem_t empty;
+sem_t full;
 
 void produce(void *args);
 void consume(void *args);
@@ -48,6 +51,8 @@ int main(int argc, char** argv) {
     
     //2. Initialize buffer
     go = pthread_mutex_init(&lock, NULL); 
+    go = sem_init(&empty, 1, BUFFER_SIZE);
+    go = sem_init(&full, 1, 0);
     for(int i = 0; i < BUFFER_SIZE; i++){
         buffer[i] = 0;
     }
@@ -75,13 +80,16 @@ int main(int argc, char** argv) {
 void produce(void *args){
 
     while(1){//add empty and full semaphores
-        int j = rand() % MAXTIME;
+        int j = rand() % MAXTIME + 1;
         sleep(j);
+        sem_wait(&empty);
         go = pthread_mutex_lock(&lock);
-        insert_item(j);
-        printf("Inserted: %d\n",j);
-        go = pthread_mutex_unlock(&lock);
+        go = insert_item(j);
+        if(go!=0){printf("Failed to Insert Item\n");}
+        else{printf("Inserted: %d\n",j);}
         
+        go = pthread_mutex_unlock(&lock);
+        sem_post(&full);
     }
 }
 
@@ -90,10 +98,13 @@ void consume(void *args){
     while(1){
         int j = rand() % MAXTIME;
         sleep(j);
+        sem_wait(&full);
         go = pthread_mutex_lock(&lock);
-        remove_item();
-        printf("Removed Item\n");
+        go = remove_item();
+        if(go!=0){printf("Failed to Removed Item\n");}
+        else{printf("Item Removed at index: %d\n",index);}
         go = pthread_mutex_unlock(&lock);
+        sem_post(&empty);
         
     }
 }
@@ -101,20 +112,17 @@ void consume(void *args){
 
 
 int insert_item(buffer_item item) {
+    if(index<0){return -1;}
     buffer[index] = item;
     index++;
-/* insert item into buffer
-return 0 if successful, otherwise
-return -1 indicating an error condition */
+    index = index % BUFFER_SIZE;
     return 0;
 }
 int remove_item(buffer_item item){
-    buffer[index] = NULL;
-    index--;
-    
-/* remove an object from
-placing it in item
-return 0 if successful, otherwise
-return -1 indicating an error condition */
+    if(index<0){return -1;}
+    else if(index == 0){index = BUFFER_SIZE;}
+    if(buffer[index] == 0){index--;}
+    buffer[index] = 0;
+    //if(emptySem){ signal empty}
     return 0;
 }

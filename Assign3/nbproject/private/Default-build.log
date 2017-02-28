@@ -1,9 +1,0 @@
-gcc -Wall -g -std=c99 -o pid_manager pid_managerMain.c -pthread
-pid_managerMain.c: In function ‘main’:
-pid_managerMain.c:32:9: warning: passing argument 1 of ‘pthread_join’ makes integer from pointer without a cast [enabled by default]
-         go = pthread_join(&t[i], NULL);
-         ^
-In file included from pid_managerMain.c:4:0:
-/usr/include/pthread.h:261:12: note: expected ‘pthread_t’ but argument is of type ‘pthread_t *’
- extern int pthread_join (pthread_t __th, void **__thread_return);
-            ^
