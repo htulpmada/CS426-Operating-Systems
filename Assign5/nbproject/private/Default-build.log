@@ -1,0 +1,23 @@
+gcc -Wall -g -std=c99 -o vmm vmm.c -pthread
+vmm.c: In function ‘main’:
+vmm.c:37:9: warning: comparison between pointer and integer [enabled by default]
+  if(argv<3){
+         ^
+vmm.c:45:2: warning: implicit declaration of function ‘open’ [-Wimplicit-function-declaration]
+  backfp = open("BACKING_STORE",'r');
+  ^
+vmm.c:45:9: warning: assignment makes pointer from integer without a cast [enabled by default]
+  backfp = open("BACKING_STORE",'r');
+         ^
+vmm.c:46:9: warning: assignment makes pointer from integer without a cast [enabled by default]
+  addrfp = open(argv[1],'r');
+         ^
+vmm.c:69:41: warning: comparison between pointer and integer [enabled by default]
+  while(fgets(line, sizeof(line), addrfp)!=EOF){
+                                         ^
+vmm.c:114:11: warning: operation on ‘nextF’ may be undefined [-Wsequence-point]
+     nextF = ++nextF % FCOUNT;
+           ^
+vmm.c:118:10: warning: operation on ‘tHead’ may be undefined [-Wsequence-point]
+    tHead = ++tHead % TSIZE;
+          ^
